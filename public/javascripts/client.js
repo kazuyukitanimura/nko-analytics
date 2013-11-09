@@ -64,31 +64,46 @@ $(function() {
       });
     }
     var sl = smoothies.length;
+    var tl = Math.ceil(trkData.length / sl);
     var i = 0;
-    trkData = trkData.sort(currentComp);
-    var trkDataPos = i + startPage * sl;
-    var trkDatum = trkData[trkDataPos];
-    var smoothie = smoothies[i];
-    i += 1;
-    if (trkDatum) {
-      var host = trkDatum.host;
-      var count = trkDatum.count;
-      var title = trkDatum.title;
-      var aveStay = trkDatum.aveStay;
-      host = 'http://' + host;
-      $('.link' + i).attr('href', host);
-      $('#title' + i).text(trkDataPos + 1 + '. ' + title);
-      $('#url' + i).text(host);
-      $('#currentValue' + i + ' i').text(' ' + count);
-      $('#aveStay' + i + ' i').text(' ' + (aveStay / 1000).toFixed() + ' sec.');
-      $('#currentValue' + i).tooltip(tooltipOptions);
-      $('#aveStay' + i).tooltip(tooltipOptions);
-      if ($('#thumb' + i).attr('src') !== host) {
-        $('#thumb' + i).attr('src', host);
+    if (tl > 1) {
+      for (i = 1; i <= sl; i++) {
+        if (i <= tl) {
+          $('#p' + i).show();
+        } else {
+          $('#p' + i).hide();
+        }
       }
-      $('#res' + i).show();
+      $('#pagination').show();
     } else {
-      $('#res' + i).hide();
+      $('#pagination').hide();
+    }
+    trkData = trkData.sort(currentComp);
+    for (i = 0; i < sl;) {
+      var trkDataPos = i + startPage * sl;
+      var trkDatum = trkData[trkDataPos];
+      var smoothie = smoothies[i];
+      i += 1;
+      if (trkDatum) {
+        var host = trkDatum.host;
+        var count = trkDatum.count;
+        var title = trkDatum.title;
+        var aveStay = trkDatum.aveStay;
+        host = 'http://' + host;
+        $('.link' + i).attr('href', host);
+        $('#title' + i).text(trkDataPos + 1 + '. ' + title);
+        $('#url' + i).text(host);
+        $('#currentValue' + i + ' i').text(' ' + count);
+        $('#aveStay' + i + ' i').text(' ' + (aveStay / 1000).toFixed() + ' sec.');
+        $('#currentValue' + i).tooltip(tooltipOptions);
+        $('#aveStay' + i).tooltip(tooltipOptions);
+        if ($('#thumb' + i).attr('src') !== host) {
+          $('#thumb' + i).attr('src', host);
+        }
+        $('#res' + i).show();
+      } else {
+        $('#res' + i).hide();
+      }
     }
     if (!trkData.length) {
       $('#no-results').show();
