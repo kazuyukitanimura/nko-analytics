@@ -40,8 +40,18 @@ $(function() {
   var rand = function(max) { // does not include max
     return Math.floor(Math.random() * max);
   };
+  var compByAveStay = function(a, b) {
+    return b.aveStay - a.aveStay;
+  };
   var compByCount = function(a, b) {
+    var res = b.count - a.count;
+    if (!res && compByAveStay) { // tie
+      return compByAveStay(a, b);
+    }
     return b.count - a.count;
+  };
+  var compByTitle = function(a, b) {
+    return a.title > b.title ? 1: - 1;
   };
   var hue = rand(360);
   var makeTS = function() {
