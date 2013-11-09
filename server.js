@@ -31,7 +31,7 @@ var makeTrk = function() {
   var mainTrkJs = fs.createReadStream(__dirname + '/lib/main-trk.js');
   var postTrkJs = fs.createReadStream(__dirname + '/lib/post-trk.js');
   try { // FIXME abusing try catch
-    fs.mkdirSync(__dirname + '/build', 775);
+    fs.mkdirSync(__dirname + '/build');
   } catch  (err) {
     console.warn(err);
   }
@@ -58,7 +58,6 @@ var makeTrk = function() {
     });
   });
 };
-makeTrk();
 
 var app = express();
 
@@ -102,6 +101,7 @@ var server = http.createServer(app).listen(app.get('port'), function() {
         return console.error(err);
       }
       process.setuid(stats.uid);
+      makeTrk();
     });
   }
 
