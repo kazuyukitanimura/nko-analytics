@@ -1,6 +1,34 @@
 $(function() {
 
   /**
+   * Controller/View
+   */
+  var NAMESPACES = {
+    HOME: '/home'
+  };
+  var socket = io.connect('//' + location.host + NAMESPACES.HOME);
+  var EVENTS = {
+    TRK_DATA: 'trkData'
+  };
+  socket.on(EVENTS.TRK_DATA, function(trkData) {
+    console.log(trkData);
+  });
+  socket.on('connect', function() {
+    $('.progress').hide();
+  });
+  socket.on('disconnect', function() {
+    $('.progress').show();
+    $('#no-results').hide();
+  });
+
+  /**
+   * Filters
+   */
+  $('#filters a').tooltip({
+    placement: 'bottom'
+  });
+
+  /**
    * detect flash and zeroclipboard
    */
   if (ZeroClipboard) {
@@ -21,3 +49,4 @@ $(function() {
     }
   }
 });
+

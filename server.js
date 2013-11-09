@@ -4,7 +4,6 @@ require('nko')('eH7wuPnFA873a0Kl');
 /**
  * Module dependencies.
  */
-
 var express = require('express');
 var routes = require('./routes');
 var http = require('http');
@@ -13,6 +12,7 @@ var fs = require('fs');
 var util = require('util');
 var url = require('url');
 var UglifyJS = require("uglify-js");
+var HostData = require('./HostData');
 
 var deepInspect = function(obj) {
   console.log(util.inspect(obj, {
@@ -32,7 +32,7 @@ var makeTrk = function() {
   var postTrkJs = fs.createReadStream(__dirname + '/lib/post-trk.js');
   try { // FIXME abusing try catch
     fs.mkdirSync(__dirname + '/build');
-  } catch  (err) {
+  } catch(err) {
     console.warn(err);
   }
   var trkJs = fs.createWriteStream(__dirname + '/build/trk.js');
@@ -101,9 +101,9 @@ var server = http.createServer(app).listen(app.get('port'), function() {
         return console.error(err);
       }
       process.setuid(stats.uid);
-      makeTrk();
     });
   }
+  makeTrk();
 
   console.log('Express server listening on port ' + app.get('port'));
 });
@@ -114,7 +114,64 @@ var server = http.createServer(app).listen(app.get('port'), function() {
 var io = require('socket.io').listen(server, {
   'log level': 1
 });
+var NAMESPACES = {
+  HOME: '/home'
+};
+var EVENTS = {
+  TRK_DATA: 'trkData'
+};
+var emitTrkData = function(trkData, sockets, delay) {
+  setTimeout(function() {
+    var sendData = [];
+    for (var k in trkData) {
+      var trkDatum = trkData[k];
+      if (trkDatum && trkData.hasOwnProperty(k)) {
+        sendData.push(trkDatum.getPublic());
+      }
+    }
+    if (sockets) {
+      for (var i = sockets; i--;) {
+        sockets[i].emit(EVENTS.TRK_DATA, sendData);
+      }
+    } else {
+      io.of(NAMESPACES.HOME).emit(EVENTS.TRK_DATA, sendData);
+    }
+  },
+  delay ? delay: 1000); // The initial delay has to be 1000 for Firefox and Safari
+};
+var trkData = {}; // key: hostname, val: HostData
 io.sockets.on('connection', function(socket) {
+  //deepInspect(socket.handshake);
+  var id = socket.id;
+  var handshake = socket.handshake;
+  var query = handshake.query;
+  var title = query.title;
+  var href = query.href;
+  if (href) {
+    var loc = url.parse(href, true);
+    socket.loc = loc;
+    var host = loc.host;
+    if (!trkData[host]) {
+      trkData[host] = new HostData(host);
+    }
+    if (id) {
+      trkData[host].add(id, title, Date.now());
+    }
+    emitTrkData(trkData);
+  }
+  socket.on('disconnect', function() {
+    var id = this.id;
+    var loc = this.loc;
+    if (loc) {
+      var host = loc.host;
+      if (trkData[host] && id) {
+        trkData[host].del(id);
+      }
+      emitTrkData(trkData);
+    }
+  });
+});
+io.of(NAMESPACES.HOME).on('connection', function(socket) {
   //deepInspect(socket.handshake);
 });
 
