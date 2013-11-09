@@ -12,6 +12,18 @@
   TimeSeries.prototype.appendNow = function(value) {
     this.append(new Date().getTime(), value);
   };
+  TimeSeries.prototype.appendKeep = function(value, delay) {
+    if (!delay) {
+      delay = 1000;
+    }
+    this.appendNow(value);
+    clearInterval(this.refresher);
+    var self = this;
+    this.refresher = setInterval(function() {
+      self.appendNow(value);
+    },
+    delay);
+  };
 })();
 
 $(function() {
@@ -125,7 +137,7 @@ $(function() {
           line = makeTS();
           hostTS[host] = line;
         }
-        line.appendNow(count);
+        line.appendKeep(count, delay);
         smoothie.addTS(line);
         host = 'http://' + host;
         $('.link' + i).attr('href', host);
