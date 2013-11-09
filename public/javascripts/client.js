@@ -50,6 +50,10 @@ $(function() {
   var EVENTS = {
     TRK_DATA: 'trkData'
   };
+  var tooltipOptions = {
+    placement: 'right'
+  };
+  var lastTrkData = [];
   var startPage = 0; // start from 0
   var currentSearch; //TODO
   var onTrkData = function(trkData) {
@@ -67,6 +71,21 @@ $(function() {
     var smoothie = smoothies[i];
     i += 1;
     if (trkDatum) {
+      var host = trkDatum.host;
+      var count = trkDatum.count;
+      var title = trkDatum.title;
+      var aveStay = trkDatum.aveStay;
+      host = 'http://' + host;
+      $('.link' + i).attr('href', host);
+      $('#title' + i).text(trkDataPos + 1 + '. ' + title);
+      $('#url' + i).text(host);
+      $('#currentValue' + i + ' i').text(' ' + count);
+      $('#aveStay' + i + ' i').text(' ' + (aveStay / 1000).toFixed() + ' sec.');
+      $('#currentValue' + i).tooltip(tooltipOptions);
+      $('#aveStay' + i).tooltip(tooltipOptions);
+      if ($('#thumb' + i).attr('src') !== host) {
+        $('#thumb' + i).attr('src', host);
+      }
       $('#res' + i).show();
     } else {
       $('#res' + i).hide();
