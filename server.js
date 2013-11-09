@@ -28,23 +28,27 @@ var makeTrk = function() {
   };
   var preTrkJs = fs.createReadStream(__dirname + '/lib/pre-trk.js');
   var ioClient = fs.createReadStream(__dirname + '/node_modules/socket.io/node_modules/socket.io-client/dist/socket.io.js');
+  var mainTrkJs = fs.createReadStream(__dirname + '/lib/main-trk.js');
   var postTrkJs = fs.createReadStream(__dirname + '/lib/post-trk.js');
   var trkJs = fs.createWriteStream(__dirname + '/build/trk.js');
   preTrkJs.pipe(trkJs, options);
   preTrkJs.on('end', function() {
     ioClient.pipe(trkJs, options);
     ioClient.on('end', function() {
-      postTrkJs.pipe(trkJs);
-      postTrkJs.on('end', function() {
-        setTimeout(function() {
-          var trkMinJs = UglifyJS.minify(__dirname + '/build/trk.js');
-          fs.writeFile(__dirname + '/build/trk.min.js', trkMinJs.code, function(err) {
-            if (err) {
-              throw err;
-            }
-          });
-        },
-        100); // hack
+      mainTrkJs.pipe(trkJs, options);
+      mainTrkJs.on('end', function() {
+        postTrkJs.pipe(trkJs);
+        postTrkJs.on('end', function() {
+          setTimeout(function() {
+            var trkMinJs = UglifyJS.minify(__dirname + '/build/trk.js');
+            fs.writeFile(__dirname + '/build/trk.min.js', trkMinJs.code, function(err) {
+              if (err) {
+                throw err;
+              }
+            });
+          },
+          100); // hack
+        });
       });
     });
   });
