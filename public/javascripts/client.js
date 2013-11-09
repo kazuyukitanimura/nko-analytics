@@ -5,6 +5,13 @@
   SmoothieChart.prototype.addTS = function(timeSeries) {
     this.addTimeSeries(timeSeries, timeSeries.options);
   };
+  SmoothieChart.prototype.rmAllTS = function(timeSeries) {
+    var seriesSet = this.seriesSet;
+    for (var i = seriesSet.length; i--;) {
+      clearInterval(seriesSet[i].resetBoundsTimerId);
+    }
+    this.seriesSet = [];
+  };
 
   /**
    * Extend TimeSeries
@@ -120,6 +127,9 @@ $(function() {
       $('#pagination').show();
     } else {
       $('#pagination').hide();
+    }
+    for (i = sl; i--;) {
+      smoothies[i].rmAllTS();
     }
     trkData = trkData.sort(currentComp);
     for (i = 0; i < sl;) {
