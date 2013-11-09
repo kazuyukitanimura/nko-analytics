@@ -34,6 +34,56 @@
       </div><!-- /.navbar-collapse -->
     </div>
 
+    <div class="modal fade" id="privacy" tabindex="-1" role="dialog" aria-labelledby="privacy-label" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 id="privacy-label" class="modal-title">Privacy Policy</h4>
+          </div>
+          <div class="modal-body">
+            <%= title %> only tracks the title, url, and time spent on the visited website. <%= title %> does not share the collected information.
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <div class="modal fade" id="technologies" tabindex="-1" role="dialog" aria-labelledby="technologies-label" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 id="technologies-label" class="modal-title"><%= title %> Is Powered by</h4>
+          </div>
+          <div class="modal-body">
+            <ul>
+              <li><a target="_blank" href="http://getbootstrap.com/">Bootstrap</a></li>
+              <li><a target="_blank" href="http://www.kirilv.com/fork-ribbon-css-builder/">CSS Ribbon Builder</a></li>
+              <li><a target="_blank" href="http://embeddedjs.com/">ejs</a></li>
+              <li><a target="_blank" href="http://expressjs.com/">express</a></li>
+              <li><a target="_blank" href="http://bootswatch.com/flatly/">Flatly</a></li>
+              <li><a target="_blank" href="http://fortawesome.github.io/Font-Awesome/">Font Awsome</a></li>
+              <li><a target="_blank" href="http://google-code-prettify.googlecode.com/svn/trunk/README.html">google-code-prettify</a></li>
+              <li><a target="_blank" href="http://jquery.com">jQuery</a></li>
+              <li><a target="_blank" href="https://github.com/fgnass/node-dev">node-dev</a></li>
+              <li><a target="_blank" href="http://smoothiecharts.org/">Smoothie Charts</a></li>
+              <li><a target="_blank" href="http://socket.io">socket.io</a></li>
+              <li><a target="_blank" href="https://github.com/mishoo/UglifyJS">uglify-js</a></li>
+              <li><a target="_blank" href="http://www.xiconeditor.com/">X-Icon Editor</a></li>
+              <li><a target="_blank" href="http://zeroclipboard.org/">ZeroClipboard</a></li>
+            </ul>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+
     <footer class="footer">
       <div class="row">
         <div class="container">
@@ -50,6 +100,7 @@
     <!--<script src="http://<%= domain %>/trk.js"></script>-->
     <script src="http://<%= domain %>/trk.min.js"></script>
     <script src="/javascripts/smoothie.js"></script>
+    <script src="//google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
     <script src="ZeroClipboard.min.js"></script>
   </body>
 </html>
