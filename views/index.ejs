@@ -87,6 +87,16 @@
       <div class="col-sm-12 col-md-8">
         <div id="main" class="container">
         </div>
+        <div class="container text-center">
+          <ul id="pagination" class="pagination" style="display: none;">
+            <li><a href="#">&laquo;</a></li>
+            <li id="p1" class="active"><a href="#">1</a></li>
+            <% for (var i = 2; i <= 5; i++) {%>
+              <li id="p<%= i %>" style="display: none;"><a href="#"><%= i %></a></li>
+            <% } %>
+            <li><a href="#">&raquo;</a></li>
+          </ul>
+        </div>
       </div>
       <div class="col-md-4">
     <!--<div class="container">-->
