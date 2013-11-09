@@ -22,6 +22,24 @@ var deepInspect = function(obj) {
   }));
 };
 
+var makeTrk = function() {
+  var ioClient = fs.createReadStream(__dirname + '/node_modules/socket.io/node_modules/socket.io-client/dist/socket.io.js');
+  var trkJs = fs.createWriteStream(__dirname + '/build/trk.js');
+  ioClient.pipe(trkJs);
+  ioClient.on('end', function() {
+    setTimeout(function() {
+      var trkMinJs = UglifyJS.minify(__dirname + '/build/trk.js');
+      fs.writeFile(__dirname + '/build/trk.min.js', trkMinJs.code, function(err) {
+        if (err) {
+          throw err;
+        }
+      });
+    },
+    100); // hack
+  });
+};
+makeTrk();
+
 var app = express();
 
 /**
@@ -79,3 +97,4 @@ var io = require('socket.io').listen(server, {
 io.sockets.on('connection', function(socket) {
   //deepInspect(socket.handshake);
 });
+
