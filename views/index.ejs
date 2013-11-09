@@ -10,7 +10,7 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <link rel="shortcut icon" href="favicon.ico">
     <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
-    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
   </head>
   <body>
     <!--[if lt IE 9]>
@@ -83,14 +83,39 @@
       </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 
+    <div class="row">
+      <div class="col-sm-12 col-md-8">
+        <div id="main" class="container">
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="container">
+          <div class="well">
+            <div class="container">
+              <h2>Add Me on Your Site <i class="fa fa-level-up"></i></h2>
+              <p>Simply place one of the following code at the bottom of the HTML body on your site.</p>
+              <dl>
+                <dt>Tracking Snippet with Ribbon</dt>
+                <dd>
+                  <button class="btn-default btn-xs btn-cp pull-right" style="display: none;" data-clipboard-target="trk-min">Copy</button>
+                  <pre class="prettyprint"><code class="language-html">&lt;script src="http://<%= domain %>/trk.min.js"&gt;&lt;/script&gt;</code></pre>
+                </dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <footer class="footer">
       <div class="row">
-        <div class="container">
-          <hr style="border:1px solid #aaa">
-          <p class="credit">&copy; 2013 <%= author %> All rights reserved except those specifically granted herein</p>
-          <!-- http://blog.nodeknockout.com/post/35364532732/protip-add-the-vote-ko-badge-to-your-app -->
-          <iframe src="http://nodeknockout.com/iframe/nko-analytics" frameborder=0 scrolling=no allowtransparency=true width=115 height=25></iframe>
+        <div class="col-sm-12 col-md-8">
+          <div class="container">
+            <hr style="border:1px solid #aaa">
+            <p class="credit">&copy; 2013 <%= author %> All rights reserved except those specifically granted herein</p>
+            <!-- http://blog.nodeknockout.com/post/35364532732/protip-add-the-vote-ko-badge-to-your-app -->
+            <iframe src="http://nodeknockout.com/iframe/nko-analytics" frameborder=0 scrolling=no allowtransparency=true width=115 height=25></iframe>
+          </div>
         </div>
       </div>
     </footer>
