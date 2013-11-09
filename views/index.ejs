@@ -45,9 +45,9 @@
               <input id="searchFilter" type="text" class="form-control" placeholder="Search title, hostname...">
             </div>
           </div>
-          <ul class="nav navbar-nav">
+      <!--<ul class="nav navbar-nav">
             <li><a target="_blank" href="https://github.com/nko4/nko-analytics/issues"><i class="fa fa-bug"></i>Bugs</a></li>
-          </ul>
+          </ul>-->
         </div>
       </div><!-- /.navbar-collapse -->
     </div>
@@ -101,6 +101,129 @@
       </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 
+    <div class="modal fade" id="ribbon" tabindex="-1" role="dialog" aria-labelledby="ribbon-label" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 id="ribbon-label" class="modal-title"><i class="fa fa-tags"></i> Tracking Snippet</h4>
+          </div>
+          <div class="modal-body">
+            <h4>Why?</h4>
+            <p>Because <%= title %> can provide real-time analytics using the data sent by the tracking snippet. <%= title %> ranks tracked <a target="_blank" href="http://nodeknockout.com/">Node Kockout</a> participant websites.</p>
+            <br>
+            <h4>How?</h4>
+            <p>Simply place one of the following code at the bottom of the HTML body on your site. There are multiple options such as with vs. without the ribbon, minified vs. unminified, the position of the ribbon.</p>
+            <br>
+            <h4>For Production (Minified)</h4>
+            <dl>
+              <dt>With Upper Right Corner Ribbon (Default)</dt>
+              <dd>
+                <button class="btn-default btn-xs btn-cp pull-right" style="display: none;" data-clipboard-target="trk-min">Copy</button>
+                <pre class="prettyprint"><code class="language-html" id="trk-min">&lt;script src="http://<%= domain %>/trk.min.js"&gt;&lt;/script&gt;</code></pre>
+              </dd>
+            </dl>
+            <dl>
+              <dt>With Upper Left Corner Ribbon</dt>
+              <dd>
+                <button class="btn-default btn-xs btn-cp pull-right" style="display: none;" data-clipboard-target="trk-min-ribbon-top-left">Copy</button>
+                <pre class="prettyprint"><code class="language-html" id="trk-min-ribbon-top-left">&lt;script src="http://<%= domain %>/trk.min.js" class="trk-ribbon-top-left"&gt;&lt;/script&gt;</code></pre>
+              </dd>
+            </dl>
+            <dl>
+              <dt>With Lower Right Corner Ribbon</dt>
+              <dd>
+                <button class="btn-default btn-xs btn-cp pull-right" style="display: none;" data-clipboard-target="trk-min-ribbon-bottom-right">Copy</button>
+                <pre class="prettyprint"><code class="language-html" id="trk-min-ribbon-bottom-right">&lt;script src="http://<%= domain %>/trk.min.js" class="trk-ribbon-bottom-right"&gt;&lt;/script&gt;</code></pre>
+              </dd>
+            </dl>
+            <dl>
+              <dt>With Lower Left Corner Ribbon</dt>
+              <dd>
+                <button class="btn-default btn-xs btn-cp pull-right" style="display: none;" data-clipboard-target="trk-min-ribbon-bottom-left">Copy</button>
+                <pre class="prettyprint"><code class="language-html" id="trk-min-ribbon-bottom-left">&lt;script src="http://<%= domain %>/trk.min.js" class="trk-ribbon-bottom-left"&gt;&lt;/script&gt;</code></pre>
+              </dd>
+            </dl>
+            <dl>
+              <dt>With Right Side Ribbon</dt>
+              <dd>
+                <button class="btn-default btn-xs btn-cp pull-right" style="display: none;" data-clipboard-target="trk-min-ribbon-side-right">Copy</button>
+                <pre class="prettyprint"><code class="language-html" id="trk-min-ribbon-side-right">&lt;script src="http://<%= domain %>/trk.min.js" class="trk-ribbon-side-right"&gt;&lt;/script&gt;</code></pre>
+              </dd>
+            </dl>
+            <dl>
+              <dt>With Left Side Ribbon</dt>
+              <dd>
+                <button class="btn-default btn-xs btn-cp pull-right" style="display: none;" data-clipboard-target="trk-min-ribbon-side-left">Copy</button>
+                <pre class="prettyprint"><code class="language-html" id="trk-min-ribbon-side-left">&lt;script src="http://<%= domain %>/trk.min.js" class="trk-ribbon-side-left"&gt;&lt;/script&gt;</code></pre>
+              </dd>
+            </dl>
+            <dl>
+              <dt>Without Ribbon</dt>
+              <dd>
+                <button class="btn-default btn-xs btn-cp pull-right" style="display: none;" data-clipboard-target="trk-min-no-ribbon">Copy</button>
+                <pre class="prettyprint"><code class="language-html" id="trk-min-no-ribbon">&lt;script src="http://<%= domain %>/trk.min.js" class="trk-no-ribbon"&gt;&lt;/script&gt;</code></pre>
+              </dd>
+            </dl>
+            <br>
+            <h4>For Debugging (Unminified)</h4>
+            <dl>
+              <dt>With Upper Right Corner Ribbon</dt>
+              <dd>
+                <button class="btn-default btn-xs btn-cp pull-right" style="display: none;" data-clipboard-target="trk">Copy</button>
+                <pre class="prettyprint"><code class="language-html" id="trk">&lt;script src="http://<%= domain %>/trk.js"&gt;&lt;/script&gt;</code></pre>
+              </dd>
+            </dl>
+            <dl>
+              <dt>With Upper Left Corner Ribbon</dt>
+              <dd>
+                <button class="btn-default btn-xs btn-cp pull-right" style="display: none;" data-clipboard-target="trk-ribbon-top-left">Copy</button>
+                <pre class="prettyprint"><code class="language-html" id="trk-ribbon-top-left">&lt;script src="http://<%= domain %>/trk.js" class="trk-ribbon-top-left"&gt;&lt;/script&gt;</code></pre>
+              </dd>
+            </dl>
+            <dl>
+              <dt>With Lower Right Corner Ribbon</dt>
+              <dd>
+                <button class="btn-default btn-xs btn-cp pull-right" style="display: none;" data-clipboard-target="trk-ribbon-bottom-right">Copy</button>
+                <pre class="prettyprint"><code class="language-html" id="trk-ribbon-bottom-right">&lt;script src="http://<%= domain %>/trk.js" class="trk-ribbon-bottom-right"&gt;&lt;/script&gt;</code></pre>
+              </dd>
+            </dl>
+            <dl>
+              <dt>With Lower Left Corner Ribbon</dt>
+              <dd>
+                <button class="btn-default btn-xs btn-cp pull-right" style="display: none;" data-clipboard-target="trk-ribbon-bottom-left">Copy</button>
+                <pre class="prettyprint"><code class="language-html" id="trk-ribbon-bottom-left">&lt;script src="http://<%= domain %>/trk.js" class="trk-ribbon-bottom-left"&gt;&lt;/script&gt;</code></pre>
+              </dd>
+            </dl>
+            <dl>
+              <dt>With Right Side Ribbon</dt>
+              <dd>
+                <button class="btn-default btn-xs btn-cp pull-right" style="display: none;" data-clipboard-target="trk-ribbon-side-right">Copy</button>
+                <pre class="prettyprint"><code class="language-html" id="trk-ribbon-side-right">&lt;script src="http://<%= domain %>/trk.js" class="trk-ribbon-side-right"&gt;&lt;/script&gt;</code></pre>
+              </dd>
+            </dl>
+            <dl>
+              <dt>With Left Side Ribbon</dt>
+              <dd>
+                <button class="btn-default btn-xs btn-cp pull-right" style="display: none;" data-clipboard-target="trk-ribbon-side-left">Copy</button>
+                <pre class="prettyprint"><code class="language-html" id="trk-ribbon-side-left">&lt;script src="http://<%= domain %>/trk.js" class="trk-ribbon-side-left"&gt;&lt;/script&gt;</code></pre>
+              </dd>
+            </dl>
+            <dl>
+              <dt>Without Ribbon</dt>
+              <dd>
+                <button class="btn-default btn-xs btn-cp pull-right" style="display: none;" data-clipboard-target="trk-no-ribbon">Copy</button>
+                <pre class="prettyprint"><code class="language-html" id="trk-no-ribbon">&lt;script src="http://<%= domain %>/trk.js" class="trk-no-ribbon"&gt;&lt;/script&gt;</code></pre>
+              </dd>
+            </dl>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
     <div class="row">
       <div class="col-sm-12 col-md-8">
         <div id="main" class="container">
@@ -129,6 +252,14 @@
                   <pre class="prettyprint"><code class="language-html">&lt;script src="http://<%= domain %>/trk.min.js"&gt;&lt;/script&gt;</code></pre>
                 </dd>
               </dl>
+              <dl>
+                <dt>Tracking Snippet without Ribbon</dt>
+                <dd>
+                  <button class="btn-default btn-xs btn-cp pull-right" style="display: none;" data-clipboard-target="trk-min-no-ribbon">Copy</button>
+                  <pre class="prettyprint"><code class="language-html">&lt;script src="http://<%= domain %>/trk.js" class="trk-no-ribbon"&gt;&lt;/script&gt;</code></pre>
+                </dd>
+              </dl>
+              <p><a class="btn btn-info" data-toggle="modal" href="#ribbon">Learn more</a></p>
         <!--</div>-->
           </div>
     <!--</div>-->
@@ -151,7 +282,21 @@
     <script src="//code.jquery.com/jquery-latest.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
     <!--<script src="http://<%= domain %>/trk.js"></script>-->
+    <!--<script src="http://<%= domain %>/trk.js" class="trk-no-ribbon"></script>-->
+    <!--<script src="http://<%= domain %>/trk.js" class="trk-ribbon-top-right"></script>-->
+    <!--<script src="http://<%= domain %>/trk.js" class="trk-ribbon-top-left"></script>-->
+    <!--<script src="http://<%= domain %>/trk.js" class="trk-ribbon-bottom-right"></script>-->
+    <!--<script src="http://<%= domain %>/trk.js" class="trk-ribbon-bottom-left"></script>-->
+    <!--<script src="http://<%= domain %>/trk.js" class="trk-ribbon-side-right"></script>-->
+    <!--<script src="http://<%= domain %>/trk.js" class="trk-ribbon-side-left"></script>-->
     <script src="http://<%= domain %>/trk.min.js"></script>
+    <!--<script src="http://<%= domain %>/trk.min.js" class="trk-no-ribbon"></script>-->
+    <!--<script src="http://<%= domain %>/trk.min.js" class="trk-ribbon-top-right"></script>-->
+    <!--<script src="http://<%= domain %>/trk.min.js" class="trk-ribbon-top-left"></script>-->
+    <!--<script src="http://<%= domain %>/trk.min.js" class="trk-ribbon-bottom-right"></script>-->
+    <!--<script src="http://<%= domain %>/trk.min.js" class="trk-ribbon-bottom-left"></script>-->
+    <!--<script src="http://<%= domain %>/trk.min.js" class="trk-ribbon-side-right"></script>-->
+    <!--<script src="http://<%= domain %>/trk.min.js" class="trk-ribbon-side-left"></script>-->
     <script src="/javascripts/smoothie.js"></script>
     <script src="/javascripts/client.js"></script>
     <script src="//google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
