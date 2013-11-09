@@ -1,3 +1,25 @@
-a {
-  color: #00B7FF;
+iframe.thumb {
+  height: 900px;
+  width: 400%;
+  border: none;
+  background-color: #FFF;
+  overflow: hidden;
+  pointer-events: none;
+  cursor: default;
+  -moz-transform:scale(0.25);
+  -moz-transform-origin: 0 0;
+  -o-transform: scale(0.25);
+  -o-transform-origin: 0 0;
+  -webkit-transform: scale(0.25);
+  -webkit-transform-origin: 0 0;
+  -ms-transform: scale(0.25);
+  -ms-transform-origin: 0 0;
+  transform:scale(0.25);
+  transform-origin: 0 0;
+}
+.link {
+  text-decoration: none;
+}
+.link:hover {
+  text-decoration: none;
 }
