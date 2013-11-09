@@ -1,9 +1,40 @@
+(function() {
+  /**
+   * Extend SmoothieChart
+   */
+  SmoothieChart.prototype.addTS = function(timeSeries) {
+    this.addTimeSeries(timeSeries, timeSeries.options);
+  };
+
+  /**
+   * Extend TimeSeries
+   */
+  TimeSeries.prototype.appendNow = function(value) {
+    this.append(new Date().getTime(), value);
+  };
+})();
+
 $(function() {
   /**
    * Convenient Functions
    */
+  var rand = function(max) { // does not include max
+    return Math.floor(Math.random() * max);
+  };
   var compByCount = function(a, b) {
     return b.count - a.count;
+  };
+  var hue = rand(360);
+  var makeTS = function() {
+    var options = {
+      strokeStyle: ['hsl(', hue, ', 100%, 50%)'].join(''),
+      fillStyle: ['hsla(', hue, ', 100%, 60%, 0.4)'].join(''),
+      lineWidth: 3
+    };
+    hue = (hue + 139) % 360; // avoid similar colors, 139 is a prime number and close to golden angle
+    var ts = new TimeSeries(options);
+    ts.appendNow(0);
+    return ts;
   };
   //var yMax = 1;
   var makeSC = function() {
@@ -65,7 +96,7 @@ $(function() {
     }
     var sl = smoothies.length;
     var tl = Math.ceil(trkData.length / sl);
-    var i = 0;
+    var i;
     if (tl > 1) {
       for (i = 1; i <= sl; i++) {
         if (i <= tl) {
@@ -89,6 +120,13 @@ $(function() {
         var count = trkDatum.count;
         var title = trkDatum.title;
         var aveStay = trkDatum.aveStay;
+        var line = hostTS[host];
+        if (!line) {
+          line = makeTS();
+          hostTS[host] = line;
+        }
+        line.appendNow(count);
+        smoothie.addTS(line);
         host = 'http://' + host;
         $('.link' + i).attr('href', host);
         $('#title' + i).text(trkDataPos + 1 + '. ' + title);
