@@ -7,7 +7,7 @@
     <meta name="description" content="<%= description %>">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link href="/stylesheets/style.css" rel="stylesheet">
     <link rel="shortcut icon" href="favicon.ico">
     <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
@@ -227,6 +227,55 @@
     <div class="row">
       <div class="col-sm-12 col-md-8">
         <div id="main" class="container">
+          <div class="progress progress-striped active">
+            <div class="progress-bar progress-bar-warning" style="width: 100%"></div>
+          </div>
+          <% for (var i = 1; i <= 5; i++) {%>
+            <div id="res<%= i %>" style="display: none;">
+              <a class="link<%= i %> link" target="_blank">
+                <h2 id="title<%= i %>" class="text-primary"></h2>
+              </a>
+              <div class="row">
+                <div class="col-lg-6">
+                  <a class="link<%= i %> link" target="_blank">
+                    <div id="url<%= i %>" class="text-info"></div>
+                  </a>
+                  <canvas class="chartCanvas" width="400" height="100" data-toggle="tooltip" title="Real-time visitor count"></canvas>
+                  <div class="panel panel-primary">
+                    <div class="panel-heading">
+                      <h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Data</h3>
+                    </div>
+                    <div class="panel-body">
+                      <div>
+                        <span id="currentValue<%= i %>" data-toggle="tooltip" title="Current visitors">
+                          <i class="fa fa-user fa-2x"></i>
+                        </span>
+                      </div>
+                      <div>
+                        <span id="aveStay<%= i %>" data-toggle="tooltip" title="Ave. time on page">
+                          <i class="fa fa-clock-o fa-2x"></i>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="panel panel-primary">
+                    <div class="panel-heading">
+                      <h3 class="panel-title"><i class="fa fa-picture-o"></i> Thumbnail</h3>
+                    </div>
+                    <div class="panel-body" style="padding: 0px; height: 225px; overflow: hidden;">
+                      <iframe id="thumb<%= i %>" sandbox scrolling="no"></iframe>
+                    </div>
+                    <div class="panel-footer" style="padding: 1px;"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% } %>
+          <div id="no-results" style="display: none;">
+            <h2 class="text-center">No Results <i class="fa fa-frown-o"></i></h2>
+          </div>
         </div>
         <div class="container text-center">
           <ul id="pagination" class="pagination" style="display: none;">
