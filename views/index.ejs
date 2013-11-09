@@ -16,10 +16,34 @@
     <!--[if lt IE 9]>
       <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a>.</p>
     <![endif]-->
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-    <!-- http://blog.nodeknockout.com/post/35364532732/protip-add-the-vote-ko-badge-to-your-app -->
-    <iframe src="http://nodeknockout.com/iframe/nko-analytics" frameborder=0 scrolling=no allowtransparency=true width=115 height=25></iframe>
+    <div class="navbar navbar-default navbar-static-top" role="navigation">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/"><%= title %></a>
+      </div>
+      <div class="collapse navbar-collapse navbar-ex1-collapse">
+        <ul class="nav navbar-nav">
+          <li><a data-toggle="modal" href="#privacy">Privacy</a></li>
+          <li><a data-toggle="modal" href="#technologies">Technologies</a></li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div>
+
+    <footer class="footer">
+      <div class="row">
+        <div class="container">
+          <hr style="border:1px solid #aaa">
+          <p class="credit">&copy; 2013 <%= author %> All rights reserved except those specifically granted herein</p>
+          <!-- http://blog.nodeknockout.com/post/35364532732/protip-add-the-vote-ko-badge-to-your-app -->
+          <iframe src="http://nodeknockout.com/iframe/nko-analytics" frameborder=0 scrolling=no allowtransparency=true width=115 height=25></iframe>
+        </div>
+      </div>
+    </footer>
 
     <script src="//code.jquery.com/jquery-latest.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
