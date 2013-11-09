@@ -1,8 +1,48 @@
 $(function() {
+  /**
+   * Convenient Functions
+   */
+  var compByCount = function(a, b) {
+    return b.count - a.count;
+  };
+  //var yMax = 1;
+  var makeSC = function() {
+    var chartFormat = {
+      timestampFormatter: SmoothieChart.timeFormatter,
+      //maxValueScale: 1.2,
+      minValue: 0,
+      labels: {
+        precision: 0
+      },
+      grid: {
+        verticalSections: 4
+        //},
+        //yRangeFunction: function(range) {
+        //  if (yMax < range.max) {
+        //    yMax = range.max;
+        //  }
+        //  return {
+        //    min: range.min,
+        //    max: yMax + 1
+        //  };
+      }
+    };
+    return new SmoothieChart(chartFormat);
+  };
 
   /**
    * Controller/View
    */
+  var delay = 1000;
+  var smoothies = [];
+  var canvases = $(".chartCanvas").tooltip();
+  for (var i = 0, l = canvases.length; i < l; i++) {
+    var smoothie = makeSC();
+    smoothie.streamTo(canvases[i], delay);
+    smoothies.push(smoothie);
+  }
+  var currentComp = compByCount;
+  var hostTS = {};
   var NAMESPACES = {
     HOME: '/home'
   };
@@ -10,9 +50,16 @@ $(function() {
   var EVENTS = {
     TRK_DATA: 'trkData'
   };
-  socket.on(EVENTS.TRK_DATA, function(trkData) {
-    console.log(trkData);
-  });
+  var onTrkData = function(trkData) {
+    lastTrkData = trkData;
+    if (currentSearch) {
+      trkData = $.grep(trkData, function(trkDatum) {
+        return (trkDatum.host || "").toLowerCase().indexOf(currentSearch) >= 0 || (trkDatum.title || "").toLowerCase().indexOf(currentSearch) >= 0;
+      });
+    }
+    trkData = trkData.sort(currentComp);
+  };
+  socket.on(EVENTS.TRK_DATA, onTrkData);
   socket.on('connect', function() {
     $('.progress').hide();
   });
