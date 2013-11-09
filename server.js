@@ -56,7 +56,7 @@ app.get('/', routes.index);
 /**
  * Start Server
  */
-http.createServer(app).listen(app.get('port'), function() {
+var server = http.createServer(app).listen(app.get('port'), function() {
   // if run as root, downgrade to the owner of this file
   if (process.getuid() === 0) {
     fs.stat(__filename, function(err, stats) {
@@ -73,5 +73,9 @@ http.createServer(app).listen(app.get('port'), function() {
 /**
  * Socket.IO
  */
-//TODO
-
+var io = require('socket.io').listen(server, {
+  'log level': 1
+});
+io.sockets.on('connection', function(socket) {
+  //deepInspect(socket.handshake);
+});
