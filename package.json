@@ -1,19 +1,29 @@
 {
-  "name": "nko4-nko-analytics",
-  "version": "0.0.0",
-  "description": "Node KO Analytics",
-  "main": "server.js",
-  "scripts": {
+  "name": "nko4-nko-analytics"
+, "version": "0.0.1"
+, "description": "Node KO Analytics"
+, "main": "server.js"
+, "scripts": {
     "start": "node server.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:nko4/nko-analytics.git"
-  },
-  "dependencies": {
+  }
+, "private": true
+, "repository": {
+    "type": "git"
+  , "url": "git@github.com:nko4/nko-analytics.git"
+  }
+, "dependencies": {
     "nko": "*"
-  },
-  "engines": {
-    "node": "0.10.x"
+  , "express": "*"
+  , "ejs": "*"
+  , "socket.io": "*"
+  , "uglify-js": "*"
+  , "zeroclipboard": "*"
+  }
+, "engines": {
+    "node": ">= 0.10.21"
+  }
+, "author": {
+    "name": "kazuyukitanimura"
+  , "email": "kazuyukitanimura@gmail.com"
   }
 }
