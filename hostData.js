@@ -26,7 +26,16 @@ var HostData = module.exports = function(options) {
 };
 
 HostData.prototype._updateTitle = function() {
-  //TODO
+  var maxCount = 0;
+  for (var k in this._titleCount) {
+    if (this._titleCount.hasOwnProperty(k)) {
+      var count = this._titleCount[k];
+      if (maxCount < count) {
+        maxCount = count;
+        this.title = k;
+      }
+    }
+  }
   this._lastUpdate = Date.now();
 };
 

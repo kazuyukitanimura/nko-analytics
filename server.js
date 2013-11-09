@@ -172,6 +172,24 @@ io.sockets.on('connection', function(socket) {
   });
 });
 io.of(NAMESPACES.HOME).on('connection', function(socket) {
-  //deepInspect(socket.handshake);
+  var delay = 1000;
+  emitTrkData(trkData, [socket], delay); // make sure to deliver the data on connect
 });
+
+/**
+ * Refresh The Model
+ */
+var refreshTime = 6 * 60 * 60 * 1000;
+setInterval(function() {
+  for (var k in trkData) {
+    if (trkData.hasOwnProperty(k)) {
+      var trkDatum = trkData[k];
+      if (trkDatum && trkDatum.count <= 0 && Date.now() - trkDatum._lastUpdate > refreshTime) {
+        trkData[k] = undefined;
+      }
+    }
+  }
+  emitTrkData(trkData);
+},
+refreshTime); // cleanup trkData regulary
 
