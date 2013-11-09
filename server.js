@@ -12,7 +12,7 @@ var fs = require('fs');
 var util = require('util');
 var url = require('url');
 var UglifyJS = require("uglify-js");
-var HostData = require('./HostData');
+var HostData = require('./hostData');
 
 var deepInspect = function(obj) {
   console.log(util.inspect(obj, {
