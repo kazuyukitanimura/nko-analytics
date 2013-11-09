@@ -30,6 +30,11 @@ var makeTrk = function() {
   var ioClient = fs.createReadStream(__dirname + '/node_modules/socket.io/node_modules/socket.io-client/dist/socket.io.js');
   var mainTrkJs = fs.createReadStream(__dirname + '/lib/main-trk.js');
   var postTrkJs = fs.createReadStream(__dirname + '/lib/post-trk.js');
+  try { // FIXME abusing try catch
+    fs.mkdirSync(__dirname + '/build', 775);
+  } catch  (err) {
+    console.warn(err);
+  }
   var trkJs = fs.createWriteStream(__dirname + '/build/trk.js');
   preTrkJs.pipe(trkJs, options);
   preTrkJs.on('end', function() {
