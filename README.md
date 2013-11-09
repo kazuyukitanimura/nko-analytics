@@ -3,6 +3,7 @@
 ~~~sh
 # getting the code
 git clone git@github.com:nko4/nko-analytics.git && cd ./nko-analytics/
+chmod 0400 ./id_deploy*
 
 # developing
 npm install
