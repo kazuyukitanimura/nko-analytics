@@ -50,6 +50,8 @@ $(function() {
   var EVENTS = {
     TRK_DATA: 'trkData'
   };
+  var startPage = 0; // start from 0
+  var currentSearch; //TODO
   var onTrkData = function(trkData) {
     lastTrkData = trkData;
     if (currentSearch) {
@@ -57,7 +59,23 @@ $(function() {
         return (trkDatum.host || "").toLowerCase().indexOf(currentSearch) >= 0 || (trkDatum.title || "").toLowerCase().indexOf(currentSearch) >= 0;
       });
     }
+    var sl = smoothies.length;
+    var i = 0;
     trkData = trkData.sort(currentComp);
+    var trkDataPos = i + startPage * sl;
+    var trkDatum = trkData[trkDataPos];
+    var smoothie = smoothies[i];
+    i += 1;
+    if (trkDatum) {
+      $('#res' + i).show();
+    } else {
+      $('#res' + i).hide();
+    }
+    if (!trkData.length) {
+      $('#no-results').show();
+    } else {
+      $('#no-results').hide();
+    }
   };
   socket.on(EVENTS.TRK_DATA, onTrkData);
   socket.on('connect', function() {
