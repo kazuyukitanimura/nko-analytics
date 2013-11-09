@@ -24,12 +24,15 @@ var deepInspect = function(obj) {
 
 var app = express();
 
+/**
+ * Configuration
+ */
 // all environments
 var isProduction = (process.env.NODE_ENV === 'production');
 app.set('port', process.env.PORT || isProduction ? 80: 3000);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-app.use(express.favicon());
+app.use(express.favicon(__dirname + '/public/favicon.ico'));
 app.use(express.logger('dev'));
 app.use(express.compress());
 app.use(express.json());
