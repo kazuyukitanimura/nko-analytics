@@ -36,9 +36,9 @@
         </p>
         <div class="btn-toolbar">
           <div id="filters" class="btn-group">
-            <a id="fcount" href="#" class="btn btn-default btn-success navbar-btn" data-toggle="tooltip" title="Current visitor"><i class="fa fa-user fa-lg"></i></a>
-            <a id="favestay" href="#" class="btn btn-default navbar-btn" data-toggle="tooltip" title="Ave. time on page"><i class="fa fa-clock-o fa-lg"></i></a>
-            <a id="ftitle" href="#" class="btn btn-default navbar-btn" data-toggle="tooltip" title="Name"><i class="fa fa-sort-alpha-asc fa-lg"></i></a>
+            <a id="fcount" href="#<%= encodeURIComponent(JSON.stringify({sort: 'count', page: 1})) %>" class="btn btn-default btn-success navbar-btn" data-toggle="tooltip" title="Current visitor"><i class="fa fa-user fa-lg"></i></a>
+            <a id="favestay" href="#<%= encodeURIComponent(JSON.stringify({sort: 'avestay', page: 1})) %>" class="btn btn-default navbar-btn" data-toggle="tooltip" title="Ave. time on page"><i class="fa fa-clock-o fa-lg"></i></a>
+            <a id="ftitle" href="#<%= encodeURIComponent(JSON.stringify({sort: 'title', page: 1})) %>" class="btn btn-default navbar-btn" data-toggle="tooltip" title="Name"><i class="fa fa-sort-alpha-asc fa-lg"></i></a>
           </div>
           <div class="navbar-form navbar-left" role="search">
             <div class="form-group">
@@ -280,9 +280,9 @@
         <div class="container text-center">
           <ul id="pagination" class="pagination" style="display: none;">
             <li><a href="#">&laquo;</a></li>
-            <li id="p1" class="active"><a href="#">1</a></li>
+            <li id="p1" class="active"><a href="#<%= encodeURIComponent(JSON.stringify({page: 1})) %>">1</a></li>
             <% for (var i = 2; i <= 5; i++) {%>
-              <li id="p<%= i %>" style="display: none;"><a href="#"><%= i %></a></li>
+              <li id="p<%= i %>" style="display: none;"><a href="#<%= encodeURIComponent(JSON.stringify({page: i})) %>"><%= i %></a></li>
             <% } %>
             <li><a href="#">&raquo;</a></li>
           </ul>

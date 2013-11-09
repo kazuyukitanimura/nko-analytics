@@ -196,6 +196,32 @@ $(function() {
   $('#filters a').tooltip({
     placement: 'bottom'
   });
+  $('#searchFilter').keyup(function(e) {
+    location.hash = encodeURIComponent(JSON.stringify({
+      search: $(this).val()
+    }));
+  });
+
+  /**
+   * Hash change
+   */
+  var compFuncs = { // key: hash url, val: comp func
+    'count': compByCount,
+    'avestay': compByAveStay,
+    'title': compByTitle
+  };
+  var hash;
+  var hashObj = {};
+  var onHashChange = function() {
+    // Firefox automatically decode location.hash, so use location.href :(
+    // http://stackoverflow.com/questions/4835784/firefox-automatically-decoding-encoded-parameter-in-url-does-not-happen-in-ie/4835922
+    var nextHash = location.href.split('#')[1]; //location.hash.slice(1);
+    if (nextHash !== hash) {
+      window.scrollTo(0, 0); // scroll to top
+    }
+  };
+  onHashChange();
+  $(window).on('hashchange', onHashChange);
 
   /**
    * detect flash and zeroclipboard
