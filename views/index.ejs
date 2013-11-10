@@ -232,6 +232,11 @@
           <div class="progress progress-striped active">
             <div class="progress-bar progress-bar-warning" style="width: 100%"></div>
           </div>
+          <div class="well">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <h4>What's this?</h4>
+            <p>NKO Analytics is a real-time dashboard for <a target="_blank" href="http://nodeknockout.com/">Node Kockout</a> participants. Given 2-day dev time, they need to make sure their websites attract visitors for every moment. This app facilitates developers to learn from other high-traffic sites. A simple analytics tool can make the hackathon more exciting! Duplicate your browser tab and see the number of visitors changes on the fly.</p>
+          </div>
           <% for (var i = 1; i <= 5; i++) {%>
             <div id="res<%= i %>" style="display: none;">
               <a class="link<%= i %> link" target="_blank">
@@ -264,7 +269,7 @@
                 <div class="col-lg-6">
                   <div class="panel panel-primary">
                     <div class="panel-heading">
-                      <h3 class="panel-title"><i class="fa fa-picture-o"></i> Thumbnail</h3>
+                      <h3 class="panel-title"><i class="fa fa-picture-o"></i> Screenshot</h3>
                     </div>
                     <div class="panel-body" style="padding: 0px; height: 225px; overflow: hidden;">
                       <iframe id="thumb<%= i %>" class="thumb" sandbox scrolling="no"></iframe>
