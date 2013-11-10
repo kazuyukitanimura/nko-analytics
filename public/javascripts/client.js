@@ -115,7 +115,7 @@ $(function() {
   };
   var lastTrkData = [];
   var startPage = 0; // start from 0
-  var currentSearch; //TODO
+  var currentSearch;
   var onTrkData = function(trkData) {
     lastTrkData = trkData;
     if (currentSearch) {
@@ -180,11 +180,12 @@ $(function() {
     } else {
       $('#no-results').hide();
     }
+    $('.progress').hide();
   };
   socket.on(EVENTS.TRK_DATA, onTrkData);
-  socket.on('connect', function() {
-    $('.progress').hide();
-  });
+  //socket.on('connect', function() {
+  //  $('.progress').hide();
+  //});
   socket.on('disconnect', function() {
     $('.progress').show();
     $('#no-results').hide();
@@ -226,8 +227,14 @@ $(function() {
           $('#filters a').removeClass('btn-success');
           $('#filters a#f' + nextSort).addClass('btn-success');
         }
+        var nextPage = nextHashObj.page;
+        if (nextPage) {
+          startPage = nextPage - 1;
+          $('#pagination li').removeClass('active');
+          $('#pagination li#p' + nextPage).addClass('active');
+        }
         hash = encodeURIComponent(JSON.stringify($.extend(hashObj, nextHashObj)));
-        if (nextComp || currentSearch !== hashObj.search) {
+        if (nextComp || nextPage || currentSearch !== hashObj.search) {
           currentSearch = hashObj.search || '';
           $('#searchFilter').val(currentSearch);
           if (lastTrkData.length) {
