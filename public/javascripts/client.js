@@ -51,7 +51,7 @@ $(function() {
     return b.count - a.count;
   };
   var compByTitle = function(a, b) {
-    return a.title > b.title ? 1: - 1;
+    return (a.title || '').toLowerCase() > (b.title || '').toLowerCase() ? 1: - 1;
   };
   var hue = rand(360);
   var makeTS = function() {
