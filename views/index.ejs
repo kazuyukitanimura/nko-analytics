@@ -279,12 +279,12 @@
         </div>
         <div class="container text-center">
           <ul id="pagination" class="pagination" style="display: none;">
-            <li><a href="#">&laquo;</a></li>
+        <!--<li><a href="#">&laquo;</a></li>-->
             <li id="p1" class="active"><a href="#<%= encodeURIComponent(JSON.stringify({page: 1})) %>">1</a></li>
             <% for (var i = 2; i <= 5; i++) {%>
               <li id="p<%= i %>" style="display: none;"><a href="#<%= encodeURIComponent(JSON.stringify({page: i})) %>"><%= i %></a></li>
             <% } %>
-            <li><a href="#">&raquo;</a></li>
+        <!--<li><a href="#">&raquo;</a></li>-->
           </ul>
         </div>
       </div>
