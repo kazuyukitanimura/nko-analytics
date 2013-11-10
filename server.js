@@ -96,12 +96,8 @@ app.get('/', routes.index);
 var server = http.createServer(app).listen(app.get('port'), function() {
   // if run as root, downgrade to the owner of this file
   if (process.getuid() === 0) {
-    fs.stat(__filename, function(err, stats) {
-      if (err) {
-        return console.error(err);
-      }
-      process.setuid(stats.uid);
-    });
+    var stats = fs.statSync(__filename);
+    process.setuid(stats.uid);
   }
   makeTrk();
 
