@@ -227,7 +227,9 @@ $(function() {
           $('#filters a#f' + nextSort).addClass('btn-success');
         }
         hash = encodeURIComponent(JSON.stringify($.extend(hashObj, nextHashObj)));
-        if (nextComp) {
+        if (nextComp || currentSearch !== hashObj.search) {
+          currentSearch = hashObj.search || '';
+          $('#searchFilter').val(currentSearch);
           if (lastTrkData.length) {
             onTrkData(lastTrkData);
           }
