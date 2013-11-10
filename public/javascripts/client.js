@@ -217,7 +217,26 @@ $(function() {
     // http://stackoverflow.com/questions/4835784/firefox-automatically-decoding-encoded-parameter-in-url-does-not-happen-in-ie/4835922
     var nextHash = location.href.split('#')[1]; //location.hash.slice(1);
     if (nextHash !== hash) {
-      window.scrollTo(0, 0); // scroll to top
+      try {
+        var nextHashObj = JSON.parse(decodeURIComponent(nextHash));
+        var nextSort = nextHashObj.sort;
+        var nextComp = compFuncs[nextSort];
+        if (nextComp) {
+          currentComp = nextComp;
+          $('#filters a').removeClass('btn-success');
+          $('#filters a#f' + nextSort).addClass('btn-success');
+        }
+        hash = encodeURIComponent(JSON.stringify($.extend(hashObj, nextHashObj)));
+        if (nextComp) {
+          if (lastTrkData.length) {
+            onTrkData(lastTrkData);
+          }
+          window.scrollTo(0, 0); // scroll to top
+        }
+        location.hash = hash;
+      } catch(err) {
+        console.warn(err);
+      }
     }
   };
   onHashChange();
