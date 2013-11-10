@@ -133,7 +133,7 @@ var emitTrkData = function(trkData, sockets, delay) {
       io.of(NAMESPACES.HOME).emit(EVENTS.TRK_DATA, sendData);
     }
   },
-  delay ? delay: 1000); // The initial delay has to be 1000 for Firefox and Safari
+  delay ? delay: 100);
 };
 var trkData = {}; // key: hostname, val: HostData
 io.sockets.on('connection', function(socket) {
